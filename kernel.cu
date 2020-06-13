@@ -5,7 +5,7 @@
 #include <time.h>
 #include <omp.h>
 
-#define Zad2
+#define Zad1
 
 
 #ifdef Zad1
