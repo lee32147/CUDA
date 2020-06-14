@@ -4,8 +4,9 @@
 #include <stdio.h>
 #include <time.h>
 #include <omp.h>
+#include <math.h>
 
-#define Zad1
+#define Zad5
 
 
 #ifdef Zad1
@@ -894,7 +895,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cint1, dev_cint1, rozmiar * sizeof(int) / 4, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (int, 1MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (int, 1MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar - rozmiarBloku + 1) / rozmiarBloku;
@@ -904,7 +905,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cint4, dev_cint4, rozmiar * sizeof(int), cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (int, 4MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (int, 4MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar * 2 - rozmiarBloku + 1) / rozmiarBloku;
@@ -914,7 +915,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cint8, dev_cint8, rozmiar * sizeof(int) * 2, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (int, 8MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (int, 8MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar * 4 - rozmiarBloku + 1) / rozmiarBloku;
@@ -924,7 +925,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cint16, dev_cint16, rozmiar * sizeof(int) * 4, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (int, 16MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (int, 16MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar / 4 - rozmiarBloku + 1) / rozmiarBloku;
@@ -934,7 +935,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cfloat1, dev_cfloat1, rozmiar * sizeof(float) / 4, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (float, 1MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (float, 1MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar - rozmiarBloku + 1) / rozmiarBloku;
@@ -944,7 +945,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cfloat4, dev_cfloat4, rozmiar * sizeof(float), cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (float, 4MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (float, 4MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar * 2 - rozmiarBloku + 1) / rozmiarBloku;
@@ -954,7 +955,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cfloat8, dev_cfloat8, rozmiar * sizeof(float) * 2, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (float, 8MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (float, 8MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar * 4 - rozmiarBloku + 1) / rozmiarBloku;
@@ -964,7 +965,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cfloat16, dev_cfloat16, rozmiar * sizeof(float) * 4, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (float, 16MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (float, 16MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar / 8 - rozmiarBloku + 1) / rozmiarBloku;
@@ -974,7 +975,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cdouble1, dev_cdouble1, rozmiar * sizeof(double) / 8, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (double, 1MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (double, 1MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar / 2 - rozmiarBloku + 1) / rozmiarBloku;
@@ -984,7 +985,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cdouble4, dev_cdouble4, rozmiar * sizeof(double) / 2, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (double, 4MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (double, 4MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar - rozmiarBloku + 1) / rozmiarBloku;
@@ -994,7 +995,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cdouble8, dev_cdouble8, rozmiar * sizeof(double), cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (double, 8MiB) [ms]: %f\n", czasGPU);
+	printf("Czas potegowania GPU (double, 8MiB) [ms]: %f\n", czasGPU);
 	cudaEventCreate(&startGPU);
 	cudaEventCreate(&stopGPU);
 	liczbaBlokow = (rozmiar * 2 - rozmiarBloku + 1) / rozmiarBloku;
@@ -1004,7 +1005,7 @@ int main()
 	cudaEventSynchronize(stopGPU);
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	cudaMemcpy(cdouble16, dev_cdouble16, rozmiar * sizeof(double) * 2, cudaMemcpyDeviceToHost);
-	printf("Czas potegowanie GPU (double, 16MiB) [ms]: %f\n\n", czasGPU);
+	printf("Czas potegowaniaGPU (double, 16MiB) [ms]: %f\n\n", czasGPU);
  
 	startCPU = omp_get_wtime();
 	dodawanieCPU(aint1, bint1, cint1, rozmiar / 4);
@@ -1325,7 +1326,6 @@ void potegowanieCPU(double *a, double *b, double *c, int rozmiar)
 #endif
 
 #ifdef Zad4
-#include <math.h>
 __global__ void kernelDodawanieMacierzy(float *a, float *b, float *c, int rozmiar)
 {
 	int i = threadIdx.y + blockIdx.y * blockDim.y;
@@ -1335,17 +1335,17 @@ __global__ void kernelDodawanieMacierzy(float *a, float *b, float *c, int rozmia
 		c[i * rozmiar + j] = a[i * rozmiar + j] + b[i * rozmiar + j];
 	}
 }
-__global__ void kernelMnozenieMacierzy(float *a, float *b, float *c, int rozmiar, int sqrtRozmiar)
+__global__ void kernelMnozenieMacierzy(float *a, float *b, float *c, int rozmiar)
 {
 	int i = threadIdx.y + blockIdx.y * blockDim.y;
 	int j = threadIdx.x + blockIdx.x * blockDim.x;
 	float wynik = 0;
-	if (i < sqrtRozmiar && j < sqrtRozmiar)
+	if (i < rozmiar && j < rozmiar)
 	{
-		/*for (int k = 0; k < rozmiar; k++)
+		for (int k = 0; k < rozmiar; k++)
 		{
 			wynik += a[i * rozmiar + k] * b[k * rozmiar + j];
-		}*/
+		}
 		c[i * rozmiar + j] = wynik;
 	}
 }
@@ -1358,12 +1358,12 @@ __global__ void kernelDodawanieMacierzy(double *a, double *b, double *c, int roz
 		c[i * rozmiar + j] = a[i * rozmiar + j] + b[i * rozmiar + j];
 	}
 }
-__global__ void kernelMnozenieMacierzy(double *a, double *b, double *c, int rozmiar, int sqrtRozmiar)
+__global__ void kernelMnozenieMacierzy(double *a, double *b, double *c, int rozmiar)
 {
 	int i = threadIdx.y + blockIdx.y * blockDim.y;
 	int j = threadIdx.x + blockIdx.x * blockDim.x;
 	double wynik = 0;
-	if (i < sqrtRozmiar && j < sqrtRozmiar)
+	if (i < rozmiar && j < rozmiar)
 	{
 		for (int k = 0; k < rozmiar; k++)
 		{
@@ -1383,7 +1383,7 @@ int main()
 	cudaSetDevice(0);
 	double startCPU, stopCPU;
 	const int rozmiar = 1024;
-	int liczbaBlokow;
+	int liczbaBlokow, rozmiarBloku = ceil(sqrt(rozmiar));
 	float czasGPU;
 	cudaEvent_t startGPU, stopGPU;
 	cudaEventCreate(&startGPU);
@@ -1401,16 +1401,17 @@ int main()
 	float *dev_cfloat1;
 	cudaMalloc(&dev_cfloat1, rozmiar * rozmiar * sizeof(float) / 4);
 	cudaMemcpy(dev_cfloat1, cfloat1, rozmiar * rozmiar * sizeof(float) / 4, cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar / 4 + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar / 4 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat1, dev_bfloat1, dev_cfloat1, rozmiar / 4);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat1, dev_bfloat1, dev_cfloat1, floor(sqrt(rozmiar * rozmiar / 4)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (float, 1) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat1, dev_bfloat1, dev_cfloat1, rozmiar / 4, floor(sqrt(rozmiar / 4)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat1, dev_bfloat1, dev_cfloat1, floor(sqrt(rozmiar * rozmiar / 4)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1443,16 +1444,17 @@ int main()
 	float *dev_cfloat4;
 	cudaMalloc(&dev_cfloat4, rozmiar * rozmiar * sizeof(float));
 	cudaMemcpy(dev_cfloat4, cfloat4, rozmiar * rozmiar * sizeof(float), cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat4, dev_bfloat4, dev_cfloat4, rozmiar);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat4, dev_bfloat4, dev_cfloat4, floor(sqrt(rozmiar * rozmiar)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (float, 4) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat4, dev_bfloat4, dev_cfloat4, rozmiar, floor(sqrt(rozmiar)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat4, dev_bfloat4, dev_cfloat4, floor(sqrt(rozmiar * rozmiar)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1485,16 +1487,17 @@ int main()
 	float *dev_cfloat8;
 	cudaMalloc(&dev_cfloat8, rozmiar * rozmiar * sizeof(float) * 2);
 	cudaMemcpy(dev_cfloat8, cfloat8, rozmiar * rozmiar * sizeof(float) * 2, cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar * 2 + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar * 2 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat8, dev_bfloat8, dev_cfloat8, rozmiar * 2);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat8, dev_bfloat8, dev_cfloat8, floor(sqrt(rozmiar * rozmiar * 2)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (float, 8) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat8, dev_bfloat8, dev_cfloat8, rozmiar * 2, floor(sqrt(rozmiar * 2)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat8, dev_bfloat8, dev_cfloat8, floor(sqrt(rozmiar * rozmiar * 2)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1527,16 +1530,17 @@ int main()
 	float *dev_cfloat16;
 	cudaMalloc(&dev_cfloat16, rozmiar * rozmiar * sizeof(float) * 4);
 	cudaMemcpy(dev_cfloat16, cfloat16, rozmiar * rozmiar * sizeof(float) * 4, cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar * 4 + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar * 4 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat16, dev_bfloat16, dev_cfloat16, rozmiar * 4);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat16, dev_bfloat16, dev_cfloat16, floor(sqrt(rozmiar * rozmiar * 4)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (float, 16) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_afloat16, dev_bfloat16, dev_cfloat16, rozmiar * 4, floor(sqrt(rozmiar * 4)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_afloat16, dev_bfloat16, dev_cfloat16, floor(sqrt(rozmiar * rozmiar * 4)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1569,16 +1573,17 @@ int main()
 	double *dev_cdouble1;
 	cudaMalloc(&dev_cdouble1, rozmiar * rozmiar * sizeof(double) / 8);
 	cudaMemcpy(dev_cdouble1, cdouble1, rozmiar * rozmiar * sizeof(double) / 8, cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar / 8 + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar / 8 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble1, dev_bdouble1, dev_cdouble1, rozmiar / 8);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble1, dev_bdouble1, dev_cdouble1, floor(sqrt(rozmiar * rozmiar / 8)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (double, 1) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble1, dev_bdouble1, dev_cdouble1, rozmiar / 8, floor(sqrt(rozmiar / 8)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble1, dev_bdouble1, dev_cdouble1, floor(sqrt(rozmiar * rozmiar / 8)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1611,16 +1616,17 @@ int main()
 	double *dev_cdouble4;
 	cudaMalloc(&dev_cdouble4, rozmiar * rozmiar * sizeof(double) / 2);
 	cudaMemcpy(dev_cdouble4, cdouble4, rozmiar * rozmiar * sizeof(double) / 2, cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar / 2 + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar / 2 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble4, dev_bdouble4, dev_cdouble4, rozmiar / 2);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble4, dev_bdouble4, dev_cdouble4, floor(sqrt(rozmiar * rozmiar / 2)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (double, 4) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble4, dev_bdouble4, dev_cdouble4, rozmiar / 2, floor(sqrt(rozmiar / 2)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble4, dev_bdouble4, dev_cdouble4, floor(sqrt(rozmiar * rozmiar / 2)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1653,16 +1659,17 @@ int main()
 	double *dev_cdouble8;
 	cudaMalloc(&dev_cdouble8, rozmiar * rozmiar * sizeof(double));
 	cudaMemcpy(dev_cdouble8, cdouble8, rozmiar * rozmiar * sizeof(double), cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble8, dev_bdouble8, dev_cdouble8, rozmiar);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble8, dev_bdouble8, dev_cdouble8, floor(sqrt(rozmiar * rozmiar)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (double, 8) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble8, dev_bdouble8, dev_cdouble8, rozmiar, floor(sqrt(rozmiar)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble8, dev_bdouble8, dev_cdouble8, floor(sqrt(rozmiar * rozmiar)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1695,16 +1702,17 @@ int main()
 	double *dev_cdouble16;
 	cudaMalloc(&dev_cdouble16, rozmiar * rozmiar * sizeof(double) * 2);
 	cudaMemcpy(dev_cdouble16, cdouble16, rozmiar * rozmiar * sizeof(double) * 2, cudaMemcpyHostToDevice);
-	liczbaBlokow = (rozmiar * rozmiar * 2 + rozmiar - 1) / rozmiar;
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar * 2 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
 	cudaEventRecord(startGPU, 0);
-	kernelDodawanieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble16, dev_bdouble16, dev_cdouble16, rozmiar * 2);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble16, dev_bdouble16, dev_cdouble16, floor(sqrt(rozmiar * rozmiar * 2)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
 	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
 	printf("Czas dodawania macierzy GPU (double, 16) [ms]: %f\n", czasGPU);
 	cudaEventRecord(startGPU, 0);
-	kernelMnozenieMacierzy << <dim3(liczbaBlokow, 1), dim3(rozmiar, 1) >> > (dev_adouble16, dev_bdouble16, dev_cdouble16, rozmiar * 2, floor(sqrt(rozmiar * 2)) - 1);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (dev_adouble16, dev_bdouble16, dev_cdouble16, floor(sqrt(rozmiar * rozmiar * 2)));
 	cudaEventRecord(stopGPU, 0);
 	cudaEventSynchronize(stopGPU);
 	cudaDeviceSynchronize();
@@ -1785,5 +1793,189 @@ void mnozeniemacierzyCPU(double *a, double *b, double *c, int rozmiar)
 #endif
 
 #ifdef Zad5
+__global__ void kernelDodawanieMacierzy(cudaTextureObject_t tex, cudaTextureObject_t tex2, float *c, int rozmiar)
+{
+	int i = threadIdx.y + blockIdx.y * blockDim.y;
+	int j = threadIdx.x + blockIdx.x * blockDim.x;
+	float a = tex1Dfetch<float>(tex, i * rozmiar + j);
+	float b = tex1Dfetch<float>(tex2, i * rozmiar + j);
+	if (i < rozmiar && j < rozmiar)
+	{
+		c[i * rozmiar + j] = a + b;
+	}
+}
+__global__ void kernelMnozenieMacierzy(cudaTextureObject_t tex, cudaTextureObject_t tex2, float *c, int rozmiar)
+{
+	int i = threadIdx.y + blockIdx.y * blockDim.y;
+	int j = threadIdx.x + blockIdx.x * blockDim.x;
+	float wynik = 0, a, b;
+	if (i < rozmiar && j < rozmiar)
+	{
+		for (int k = 0; k < rozmiar; k++)
+		{
+			wynik += tex1Dfetch<float>(tex, i * rozmiar + k) * tex1Dfetch<float>(tex2, k * rozmiar + j);
+		}
+		c[i * rozmiar + j] = wynik;
+	}
+}
 
+int main()
+{
+	cudaSetDevice(0);
+	const int rozmiar = 1024;
+	int liczbaBlokow, rozmiarBloku = ceil(sqrt(rozmiar));
+	float czasGPU;
+	cudaEvent_t startGPU, stopGPU;
+	cudaEventCreate(&startGPU);
+	cudaEventCreate(&stopGPU);
+	float *afloat1_buffer;
+	cudaMalloc(&afloat1_buffer, rozmiar * rozmiar * sizeof(float) / 4);
+	float *bfloat1_buffer;
+	cudaMalloc(&bfloat1_buffer, rozmiar * rozmiar * sizeof(float) / 4);
+	float *cfloat1_buffer;
+	cudaMalloc(&cfloat1_buffer, rozmiar * rozmiar * sizeof(float) / 4);
+	cudaResourceDesc resDesc;
+	memset(&resDesc, 0, sizeof(resDesc));
+	resDesc.resType = cudaResourceTypeLinear;
+	resDesc.res.linear.devPtr = afloat1_buffer;
+	resDesc.res.linear.desc.f = cudaChannelFormatKindFloat;
+	resDesc.res.linear.desc.x = 32;
+	resDesc.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) / 4;
+	cudaTextureDesc texDesc;
+	memset(&texDesc, 0, sizeof(texDesc));
+	texDesc.readMode = cudaReadModeElementType;
+	cudaTextureObject_t tex = 0;
+	cudaCreateTextureObject(&tex, &resDesc, &texDesc, NULL);
+	cudaResourceDesc resDesc2;
+	memset(&resDesc2, 0, sizeof(resDesc2));
+	resDesc2.resType = cudaResourceTypeLinear;
+	resDesc2.res.linear.devPtr = bfloat1_buffer;
+	resDesc2.res.linear.desc.f = cudaChannelFormatKindFloat;
+	resDesc2.res.linear.desc.x = 32;
+	resDesc2.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) / 4;
+	cudaTextureDesc texDesc2;
+	memset(&texDesc2, 0, sizeof(texDesc2));
+	texDesc2.readMode = cudaReadModeElementType;
+	cudaTextureObject_t tex2 = 0;
+	cudaCreateTextureObject(&tex2, &resDesc2, &texDesc2, NULL);
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar / 4 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
+	cudaEventRecord(startGPU, 0);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat1_buffer, floor(sqrt(rozmiar * rozmiar / 4)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas dodawania macierzy GPU (float, 1) [ms]: %f\n", czasGPU);
+	cudaEventRecord(startGPU, 0);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat1_buffer, floor(sqrt(rozmiar * rozmiar / 4)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas mnozenia macierzy GPU (float, 1) [ms]: %f\n", czasGPU);
+	cudaFree(afloat1_buffer);
+	cudaFree(bfloat1_buffer);
+	cudaFree(cfloat1_buffer);
+
+	float *afloat8_buffer;
+	cudaMalloc(&afloat8_buffer, rozmiar * rozmiar * sizeof(float) * 2);
+	float *bfloat8_buffer;
+	cudaMalloc(&bfloat8_buffer, rozmiar * rozmiar * sizeof(float) * 2);
+	float *cfloat8_buffer;
+	cudaMalloc(&cfloat8_buffer, rozmiar * rozmiar * sizeof(float) * 2);
+	resDesc.res.linear.devPtr = afloat8_buffer;
+	resDesc.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) * 2;
+	cudaCreateTextureObject(&tex, &resDesc, &texDesc, NULL);
+	resDesc2.res.linear.devPtr = bfloat8_buffer;
+	resDesc2.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) * 2;
+	cudaCreateTextureObject(&tex2, &resDesc2, &texDesc2, NULL);
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar * 2 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
+	cudaEventRecord(startGPU, 0);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat8_buffer, floor(sqrt(rozmiar * rozmiar * 2)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas dodawania macierzy GPU (float, 8) [ms]: %f\n", czasGPU);
+	cudaEventRecord(startGPU, 0);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat8_buffer, floor(sqrt(rozmiar * rozmiar * 2)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas mnozenia macierzy GPU (float, 8) [ms]: %f\n", czasGPU);
+	cudaFree(afloat8_buffer);
+	cudaFree(bfloat8_buffer);
+	cudaFree(cfloat8_buffer);
+
+	float *afloat96_buffer;
+	cudaMalloc(&afloat96_buffer, rozmiar * rozmiar * sizeof(float) * 24);
+	float *bfloat96_buffer;
+	cudaMalloc(&bfloat96_buffer, rozmiar * rozmiar * sizeof(float) * 24);
+	float *cfloat96_buffer;
+	cudaMalloc(&cfloat96_buffer, rozmiar * rozmiar * sizeof(float) * 24);
+	resDesc.res.linear.devPtr = afloat96_buffer;
+	resDesc.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) * 24;
+	cudaCreateTextureObject(&tex, &resDesc, &texDesc, NULL);
+	resDesc2.res.linear.devPtr = bfloat96_buffer;
+	resDesc2.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) * 24;
+	cudaCreateTextureObject(&tex2, &resDesc2, &texDesc2, NULL);
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar * 24 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
+	cudaEventRecord(startGPU, 0);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat96_buffer, floor(sqrt(rozmiar * rozmiar * 24)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas dodawania macierzy GPU (float, 96) [ms]: %f\n", czasGPU);
+	cudaEventRecord(startGPU, 0);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat96_buffer, floor(sqrt(rozmiar * rozmiar * 24)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas mnozenia macierzy GPU (float, 96) [ms]: %f\n", czasGPU);
+	cudaFree(afloat8_buffer);
+	cudaFree(bfloat8_buffer);
+	cudaFree(cfloat8_buffer);
+
+	float *afloat256_buffer;
+	cudaMalloc(&afloat256_buffer, rozmiar * rozmiar * sizeof(float) * 65);
+	float *bfloat256_buffer;
+	cudaMalloc(&bfloat256_buffer, rozmiar * rozmiar * sizeof(float) * 65);
+	float *cfloat256_buffer;
+	cudaMalloc(&cfloat256_buffer, rozmiar * rozmiar * sizeof(float) * 65);
+	resDesc.res.linear.devPtr = afloat256_buffer;
+	resDesc.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) * 65;
+	cudaCreateTextureObject(&tex, &resDesc, &texDesc, NULL);
+	resDesc2.res.linear.devPtr = bfloat256_buffer;
+	resDesc2.res.linear.sizeInBytes = rozmiar * rozmiar * sizeof(float) * 65;
+	cudaCreateTextureObject(&tex2, &resDesc2, &texDesc2, NULL);
+
+	liczbaBlokow = ceil(sqrt((rozmiar * rozmiar * 65 + rozmiar - 1) / rozmiar));
+	rozmiarBloku = ceil(sqrt(rozmiar));
+	cudaEventRecord(startGPU, 0);
+	kernelDodawanieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat256_buffer, floor(sqrt(rozmiar * rozmiar * 65)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas dodawania macierzy GPU (float, 256) [ms]: %f\n", czasGPU);
+	cudaEventRecord(startGPU, 0);
+	kernelMnozenieMacierzy << <dim3(liczbaBlokow, liczbaBlokow), dim3(rozmiarBloku, rozmiarBloku) >> > (tex, tex2, cfloat256_buffer, floor(sqrt(rozmiar * rozmiar * 64)));
+	cudaEventRecord(stopGPU, 0);
+	cudaEventSynchronize(stopGPU);
+	cudaDeviceSynchronize();
+	cudaEventElapsedTime(&czasGPU, startGPU, stopGPU);
+	printf("Czas mnozenia macierzy GPU (float, 256) [ms]: %f\n", czasGPU);
+	cudaFree(afloat256_buffer);
+	cudaFree(bfloat256_buffer);
+	cudaFree(cfloat256_buffer);
+
+	cudaDeviceReset();
+	return 0;
+}
 #endif
